@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "檔案上傳";
+}
+
+<h1 class="display-4">Welcome</h1>
+<h2>@ViewData["Title"]</h2>
+
+<div class="text-center">
+    <p>上傳檔案，服務器將會分析檔案內容並按指定條件篩查</p>
+    @*上傳表單*@
+    <form asp-controller="Home" asp-action="Upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">選擇檔案：</label>
+            <input type="file" name="file" id="file" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">上傳檔案</button>
+    </form>
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info mt-3">
+        @ViewBag.Message
+    </div>
+}
+
+@if (ViewBag.FileContent != null)
+{
+    <div class="alert alert-info mt-3">
+        <strong>檔案內容：</strong>
+        <pre>@ViewBag.FileContent</pre>
+    </div>
+}
