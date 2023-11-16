@@ -40,16 +40,20 @@ namespace NumberFiler.Controllers
                     var fileContent = Encoding.UTF8.GetString(stream.ToArray());
                     // 字串 逐行分割
                     string[] numbers = fileContent.Split('\n');
-                    // 建立分類結果
-                    List<ClassifiedNumber> results = new List<ClassifiedNumber>();
+                    // 去除重複
+                    var uniqueNumbers = numbers.Distinct().ToArray();
+                    
+                    // 分類結果
+                    List<ClassifiedNumber> results = new List<ClassifiedNumber>();                    
+
                     // 開始分類
-                    foreach (var number in numbers)
+                    foreach (var number in uniqueNumbers)
                     {
                         var result = getClassifyByNumber(number);
                         results.Add(new ClassifiedNumber { T = result, Number = number });
                     }
                     // 將結果分組
-                    var groupResult = results.GroupBy(r => r.T).ToList();
+                    var groupResult = results.OrderBy(r => r.Number).GroupBy(r => r.T).ToList();
 
                     // 資料透過 ViewBag 傳遞
                     ViewBag.Results = groupResult;
