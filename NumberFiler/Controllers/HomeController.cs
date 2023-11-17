@@ -2,6 +2,8 @@
 
 using NumberFiler.Models;
 
+using PhoneNumbers;
+
 using System.Diagnostics;
 using System.Text;
 
@@ -40,23 +42,27 @@ namespace NumberFiler.Controllers
                     var fileContent = Encoding.UTF8.GetString(stream.ToArray());
                     // 字串 逐行分割
                     string[] numbers = fileContent.Split('\n');
-                    // 去除重複
-                    var uniqueNumbers = numbers.Distinct().ToArray();
-                    
+
+                    var result = numbers
+                        .Distinct() // 去除重複
+                        .Select(n => parseNumber(n)) // 正則化
+                        .GroupBy(n => getClassifyByNumber(n))
+                        .ToArray();
+
                     // 分類結果
-                    List<ClassifiedNumber> results = new List<ClassifiedNumber>();                    
+                    // List<ClassifiedNumber> results = new List<ClassifiedNumber>();
 
                     // 開始分類
-                    foreach (var number in uniqueNumbers)
-                    {
-                        var result = getClassifyByNumber(number);
-                        results.Add(new ClassifiedNumber { T = result, Number = number });
-                    }
+                    //foreach (var number in uniqueNumbers)
+                    //{
+                    //    var result = getClassifyByNumber(number);
+                    //    results.Add(new ClassifiedNumber { T = result, Number = number });
+                    //}
                     // 將結果分組
-                    var groupResult = results.OrderBy(r => r.Number).GroupBy(r => r.T).ToList();
+                    //var groupResult = results.OrderBy(r => r.Number).GroupBy(r => r.T).ToList();
 
                     // 資料透過 ViewBag 傳遞
-                    ViewBag.Results = groupResult;
+                    ViewBag.Results = result;
                 }
             }
             else
@@ -75,90 +81,119 @@ namespace NumberFiler.Controllers
 
         private MyType getClassifyByNumber(string input)
         {
-            var first5 = input.Substring(0, 5);
+            var tests = input.Split(' ');
+            var first5 = tests[1];
             switch (first5)
             {
-                case "63907":
-                case "63908":
-                case "63909":
-                case "63910":
-                case "63912":
-                case "63918":
-                case "63919":
-                case "63920":
-                case "63921":
-                case "63922":
-                case "63923":
-                case "63924":
-                case "63925":
-                case "63928":
-                case "63929":
-                case "63930":
-                case "63931":
-                case "63932":
-                case "63933":
-                case "63938":
-                case "63939":
-                case "63942":
-                case "63943":
-                case "63946":
-                case "63947":
-                case "63948":
-                case "63950":
-                case "63951":
-                case "63960":
-                case "63961":
-                case "63962":
-                case "63963":
-                case "63964":
-                case "63968":
-                case "63969":
-                case "63970":
-                case "63973":
-                case "63974":
-                case "63981":
-                case "63988":
-                case "63998":
-                case "63999":
+                case "907":
+                case "908":
+                case "909":
+                case "910":
+                case "912":
+                case "918":
+                case "919":
+                case "920":
+                case "921":
+                case "922":
+                case "923":
+                case "924":
+                case "925":
+                case "928":
+                case "929":
+                case "930":
+                case "931":
+                case "932":
+                case "933":
+                case "938":
+                case "939":
+                case "942":
+                case "943":
+                case "946":
+                case "947":
+                case "948":
+                case "950":
+                case "951":
+                case "960":
+                case "961":
+                case "962":
+                case "963":
+                case "964":
+                case "968":
+                case "969":
+                case "970":
+                case "973":
+                case "974":
+                case "981":
+                case "988":
+                case "998":
+                case "999":
                     return MyType.SMART;
-                case "63904":
-                case "63905":
-                case "63906":
-                case "63915":
-                case "63916":
-                case "63917":
-                case "63926":
-                case "63927":
-                case "63935":
-                case "63936":
-                case "63945":
-                case "63952":
-                case "63953":
-                case "63954":
-                case "63955":
-                case "63956":
-                case "63965":
-                case "63966":
-                case "63967":
-                case "63975":
-                case "63977":
-                case "63983":
-                case "63986":
-                case "63987":
-                case "63989":
-                case "63995":
-                case "63997":
+                case "904":
+                case "905":
+                case "906":
+                case "915":
+                case "916":
+                case "917":
+                case "926":
+                case "927":
+                case "935":
+                case "936":
+                case "945":
+                case "952":
+                case "953":
+                case "954":
+                case "955":
+                case "956":
+                case "965":
+                case "966":
+                case "967":
+                case "975":
+                case "977":
+                case "983":
+                case "986":
+                case "987":
+                case "989":
+                case "995":
+                case "997":
                     return MyType.GLOBE;
-                case "63991":
-                case "63992":
-                case "63993":
-                case "63994":
+                case "991":
+                case "992":
+                case "993":
+                case "994":
                     return MyType.DITO;
-                case "63996":
+                case "996":
                     return MyType.CHERRY;
                 default:
                     return MyType.NONE;
             }
+        }
+
+        private String? parseNumber(string input)
+        {
+            // 使用 libphonenumber
+            PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance();
+            // 菲律賓國家代碼
+            string countryCode = "PH";
+            // 是不是合法電話號碼
+            bool isValidNumber = false;
+
+            // 輸出格式化後的號碼
+            String formattedNumber = "";
+            try
+            {
+                PhoneNumber phoneNumber = phoneUtil.Parse(input, countryCode);
+                isValidNumber = phoneUtil.IsValidNumber(phoneNumber); // returns true for valid number
+                formattedNumber = phoneUtil.Format(phoneNumber, PhoneNumberFormat.INTERNATIONAL);
+            }
+            catch (NumberParseException ex)
+            {
+                String errorMessage = "NumberParseException was thrown: " + ex.Message.ToString();
+            }
+
+            if (isValidNumber) return formattedNumber;
+
+
+            else return null;
         }
     }
     public enum MyType

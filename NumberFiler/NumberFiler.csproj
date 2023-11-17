@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="libphonenumber-csharp" Version="8.13.24" />
+  </ItemGroup>
+
 </Project>

@@ -1,11 +1,47 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {}
+    "net7.0": {
+      "libphonenumber-csharp/8.13.24": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/PhoneNumbers.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/PhoneNumbers.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "libphonenumber-csharp/8.13.24": {
+      "sha512": "Pq/TqzVAVq6N8LeE5Qhg3UDzPV9Hr2UShRUp5GbaANPBU11MA1LTUOmVnMwYhxcZAkGsCkVBkcek3WhOj+hnIg==",
+      "type": "package",
+      "path": "libphonenumber-csharp/8.13.24",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net6.0/PhoneNumbers.dll",
+        "lib/net6.0/PhoneNumbers.xml",
+        "lib/net7.0/PhoneNumbers.dll",
+        "lib/net7.0/PhoneNumbers.xml",
+        "lib/netstandard2.0/PhoneNumbers.dll",
+        "lib/netstandard2.0/PhoneNumbers.xml",
+        "libphonenumber-csharp.8.13.24.nupkg.sha512",
+        "libphonenumber-csharp.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0": []
+    "net7.0": [
+      "libphonenumber-csharp >= 8.13.24"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\user\\.nuget\\packages\\": {},
@@ -52,6 +88,12 @@
     "frameworks": {
       "net7.0": {
         "targetAlias": "net7.0",
+        "dependencies": {
+          "libphonenumber-csharp": {
+            "target": "Package",
+            "version": "[8.13.24, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

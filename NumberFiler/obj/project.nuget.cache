@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "H6XRU1crlz7qFxMJ80LG0vNeLuxZpLEJDvhU9DdT+xCsJywlJxoxQ8PKwrKQjVReBZxrmSpnSPfgDrA+M+PxpQ==",
+  "dgSpecHash": "weeSAcHyBQ1kCk78tf2h8Y2n7AHGVCJy3lE89ZSuEUSP5sryldj3iS90SSSSQF4Id7JZ1vhjuwe295+mYtN6Jw==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\source\\repos\\NumberFiler\\NumberFiler\\NumberFiler.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\libphonenumber-csharp\\8.13.24\\libphonenumber-csharp.8.13.24.nupkg.sha512"
+  ],
   "logs": []
 }

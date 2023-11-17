@@ -27,30 +27,27 @@
 @if (ViewBag.Results != null)
 {
     <h3> 分類結果 </h3>
-    
+
     <div class="alert alert-info mt-3">
         <strong>檔案內容：</strong>
-
-        @foreach (var group in ViewBag.Results)
-        {
-            <h2>Category: @group.Key</h2>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Number</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var result in group)
-                    {
-                        <tr>
-                            <td>@result.Number</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-
+        <div class="container">
+            <div class="row">
+                @foreach (var group in ViewBag.Results)
+                {
+                    <div class="col">
+                        <h2>Category: @group.Key</h2>
+                        <div class="row">
+                            @foreach (var result in group)
+                            {
+                                <div class="col-6">
+                                    @result
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
         <pre>@ViewBag.FileContent</pre>
     </div>
 }

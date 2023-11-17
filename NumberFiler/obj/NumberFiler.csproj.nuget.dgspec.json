@@ -45,6 +45,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "libphonenumber-csharp": {
+              "target": "Package",
+              "version": "[8.13.24, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
