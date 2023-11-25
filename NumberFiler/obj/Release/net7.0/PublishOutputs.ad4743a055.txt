@@ -5,3 +5,4 @@ C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\PubTmp\Out
 C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\PubTmp\Out\NumberFiler.deps.json
 C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\PubTmp\Out\NumberFiler.runtimeconfig.json
 C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\PubTmp\Out\NumberFiler.pdb
+C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\PubTmp\Out\PhoneNumbers.dll

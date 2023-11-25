@@ -29,3 +29,5 @@ C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\refint\Num
 C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\NumberFiler.pdb
 C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\NumberFiler.genruntimeconfig.cache
 C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\ref\NumberFiler.dll
+C:\Users\user\source\repos\NumberFiler\NumberFiler\bin\Release\net7.0\PhoneNumbers.dll
+C:\Users\user\source\repos\NumberFiler\NumberFiler\obj\Release\net7.0\NumberFiler.csproj.CopyComplete

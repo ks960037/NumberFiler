@@ -81,6 +81,7 @@ namespace NumberFiler.Controllers
 
         private MyType getClassifyByNumber(string input)
         {
+            if (input == null) return MyType.NONE;
             var tests = input.Split(' ');
             var first5 = tests[1];
             switch (first5)
